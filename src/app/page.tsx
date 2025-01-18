@@ -67,6 +67,8 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
+
+
         <section id="testimonials" className="w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-8">What Our Clients Say</h2>
@@ -86,6 +88,45 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
+
+        <section id="Team" className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
+
+          <div className="container px-4 md:px-6">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-8">Our Dedicated Crew</h2>
+            <p className="mt-4 mb-10 text-xl text-center text-muted-foreground">
+              Get to know the experts behind Data Lens, committed to shaping the future of social media analytics.
+            </p>
+            <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
+              <div className="flex flex-col items-center text-center">
+                <img src="https://media.licdn.com/dms/image/v2/D4D03AQG_9Bjv45GZbA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1731152153375?e=1741824000&v=beta&t=Q01o57JRLtg5Pj-Vxs7IoUK_ja2NDpbeKv1OVIF4LM4" alt="Profile Picture" className="h-24 w-24 rounded-full mb-4" />
+                <p className="font-bold">Pratap Parui</p>
+                <p className="font-bold">Consultant | Frontend Developer</p>
+                <p className="mb-4 text-gray-500 dark:text-gray-400">"Passionate about creating intuitive and dynamic user experiences."</p>
+              </div>
+              <div className="flex flex-col items-center text-center">
+                <img src="https://media.licdn.com/dms/image/v2/D5603AQFQIGSEgMB1mQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1731182250556?e=1741824000&v=beta&t=NjKiDcuDU-EXFq2SJ0O5ObKsOpjj449H3vHzOuhopIk" alt="Profile Picture" className="h-24 w-24 rounded-full mb-4" />
+                <p className="font-bold">Shreya Watane</p>
+                <p className="font-bold">Cybersecurity Enthusiast and Developer</p>
+                <p className="mb-4 text-gray-500 dark:text-gray-400">"Dedicated to securing systems and developing robust cybersecurity solutions."</p>
+              </div>
+              <div className="flex flex-col items-center text-center">
+              <img src="https://media.licdn.com/dms/image/v2/C4E03AQEpaXO7hvUCSg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1646743604214?e=1741824000&v=beta&t=5ZQIQNH2ca74eaphxF_i2xuQOTo_d6U1Uh8omLXTL5A" alt="Profile Picture" className="h-24 w-24 rounded-full mb-4" />
+                <p className="font-bold">Rahmat ali Shaikh</p>
+                <p className="font-bold">Cybersecurity Enthusiast and Developer</p>
+                <p className="mb-4 text-gray-500 dark:text-gray-400">"Focused on cybersecurity and developing secure applications."</p>
+              </div>
+              <div className="flex flex-col items-center text-center">
+              <img src="https://media.licdn.com/dms/image/v2/D5603AQEVr38cnTbNYQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1693517283615?e=1741824000&v=beta&t=XSTMB3_6sx-lsUeePGs6Q3B2Bf1u1TWhfx7y3pMXZ_s" alt="Profile Picture" className="h-24 w-24 rounded-full mb-4" />
+                <p className="font-bold">Prathamesh Yandolli</p>
+                <p className="font-bold">Developer</p>
+                <p className="mb-4 text-gray-500 dark:text-gray-400">"Enthusiastic developer with a knack for problem-solving and innovation."</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+
       </main>
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
         <p className="text-xs text-gray-500 dark:text-gray-400">© 2025 Zen Sphere. All rights reserved.</p>
