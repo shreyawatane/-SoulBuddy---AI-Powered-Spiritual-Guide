@@ -6,8 +6,9 @@ import { useRouter } from 'next/navigation'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Star } from 'lucide-react'
+import axios from 'axios';
+import { useChartContext } from '@/context/ChartContext'
 
 export default function FormPage() {
   const [formData, setFormData] = useState({
@@ -16,24 +17,77 @@ export default function FormPage() {
     birthdate: '',
     birthtime: '',
     birthplace: '',
-    readingType: '',
+    latitude: '',
+    longitude: ''
   })
+  const [suggestions, setSuggestions] = useState([])
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
   const router = useRouter()
+  const { setChartData, setUserData, setAnalysisData } = useChartContext()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData(prevState => ({ ...prevState, [name]: value }))
   }
 
-  const handleSelectChange = (value: string) => {
-    setFormData(prevState => ({ ...prevState, readingType: value }))
+  const handlePlaceSelect = (place: any) => {
+    setFormData(prevState => ({
+      ...prevState,
+      birthplace: place.properties.formatted,
+      latitude: place.properties.lat,
+      longitude: place.properties.lon
+    }))
+    setSuggestions([])
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    const queryString = new URLSearchParams(formData).toString()
-    router.push(`/insights?${queryString}`)
+  const handleAutocomplete = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+    setFormData(prevState => ({ ...prevState, birthplace: value }))
+    if (value.length > 2) {
+      fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${value}&apiKey=d8ae1525aa3943f8a19e3ad8eb97f2ff`)
+        .then(response => response.json())
+        .then(result => setSuggestions(result.features))
+        .catch(error => console.log('error', error))
+    } else {
+      setSuggestions([])
+    }
   }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError('');
+
+    const kundaliData = {
+      name: formData.name,
+      dob: formData.birthdate,
+      time: formData.birthtime || '12:00',
+      gender: 'Male',
+      city: formData.birthplace,
+      latitude: formData.latitude,
+      longitude: formData.longitude,
+      timezone_offset: 5.5
+    };
+
+    try {
+      const response = await axios.post('/api/kundali', kundaliData);
+      
+      if (response.data.status === "success") {
+        setChartData(response.data.kundali);
+        setUserData(formData);
+        setAnalysisData(response.data.remedies);
+        router.push('/insights');
+      } else {
+        setError('Failed to generate chart');
+      }
+    } catch (err) {
+      setError('Error generating chart. Please try again.');
+      console.error('API Error:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -45,11 +99,12 @@ export default function FormPage() {
       </header>
       <main className="flex-1 container max-w-2xl mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-6">Your gateway to tranquility.</h1>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <Label htmlFor="name">Full Name</Label>
-            <Input id="name" name="name" value={formData.name} onChange={handleChange} required />
-          </div>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {error && <div className="text-red-500 mb-4">{error}</div>}
+        <div>
+          <Label htmlFor="name">Name</Label>
+          <Input id="name" name="name" value={formData.name} onChange={handleChange} required />
+        </div>
           <div>
             <Label htmlFor="email">Email</Label>
             <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required />
@@ -64,22 +119,24 @@ export default function FormPage() {
           </div>
           <div>
             <Label htmlFor="birthplace">Birth Place</Label>
-            <Input id="birthplace" name="birthplace" value={formData.birthplace} onChange={handleChange} required />
+            <Input id="birthplace" name="birthplace" value={formData.birthplace} onChange={handleAutocomplete} required />
+            {suggestions.length > 0 && (
+              <ul className="border border-gray-300 mt-2 rounded-md">
+                {suggestions.map((suggestion: any) => (
+                  <li
+                    key={suggestion.properties.place_id}
+                    className="p-2 cursor-pointer hover:bg-gray-200"
+                    onClick={() => handlePlaceSelect(suggestion)}
+                  >
+                    {suggestion.properties.formatted}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
-          <div>
-            <Label htmlFor="readingType">Type of Reading</Label>
-            <Select onValueChange={handleSelectChange}>
-              <SelectTrigger>
-                <SelectValue placeholder="Select a reading type" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="astrology">Astrology</SelectItem>
-                <SelectItem value="numerology">Numerology</SelectItem>
-                <SelectItem value="combined">Combined (Astrology & Numerology)</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <Button type="submit" className="w-full">Submit</Button>
+          <Button type="submit" className="w-full" disabled={isLoading}>
+            {isLoading ? 'Generating...' : 'Submit'}
+          </Button>
         </form>
       </main>
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
