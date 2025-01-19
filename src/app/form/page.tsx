@@ -73,9 +73,9 @@ export default function FormPage() {
                 <SelectValue placeholder="Select a reading type" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="astrology">Astrology</SelectItem>
-                <SelectItem value="numerology">Numerology</SelectItem>
-                <SelectItem value="combined">Combined (Astrology & Numerology)</SelectItem>
+                <SelectItem value="Doshas in your life">Doshas in your life</SelectItem>
+                <SelectItem value="astrology">Astrology(coming soon)</SelectItem>
+                <SelectItem value="numerology">Numerology(coming soon)</SelectItem>
               </SelectContent>
             </Select>
           </div>

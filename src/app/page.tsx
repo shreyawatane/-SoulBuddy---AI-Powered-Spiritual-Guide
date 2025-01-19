@@ -17,12 +17,13 @@ export default function LandingPage() {
           <Link className="text-sm font-medium hover:underline underline-offset-4" href="#testimonials">
             Testimonials
           </Link>
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="/form">
-            Get Reading
+          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#Team">
+            Our Team
           </Link>
         </nav>
       </header>
-      <main className="flex-1">
+      {/* <main className="flex-1 bg-cover bg-center min-h-screen" style={{ backgroundImage: "url('src/asset/background-edit.PNG')" }}> */}
+      <main className="flex-1 bg-cover bg-center min-h-screen" style={{ backgroundImage: "url('https://cdn.discordapp.com/attachments/1323574400213192707/1330359770070388886/background-edit.png?ex=678db196&is=678c6016&hm=466069cbf12d7160fa0f43abf8de78926a08c9973176f11eb6c863a140b6bb37&')" }}>
         <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
@@ -30,7 +31,7 @@ export default function LandingPage() {
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
                   Discover Your Cosmic Path
                 </h1>
-                <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
+                <p className="mx-auto max-w-[700px] text-yellow-500 md:text-xl dark:text-gray-400">
                   Unlock the secrets of the stars and numbers. Get personalized insights into your life's journey.
                 </p>
               </div>
@@ -52,17 +53,17 @@ export default function LandingPage() {
               <div className="flex flex-col items-center text-center">
                 <Moon className="h-12 w-12 mb-4 text-primary" />
                 <h3 className="text-xl font-bold mb-2">Astrology Readings</h3>
-                <p className="text-gray-500 dark:text-gray-400">Gain insights from the positions of celestial bodies.</p>
+                <p className="text-yellow-500 dark:text-gray-400">Gain insights from the positions of celestial bodies.</p>
               </div>
               <div className="flex flex-col items-center text-center">
                 <Sun className="h-12 w-12 mb-4 text-primary" />
                 <h3 className="text-xl font-bold mb-2">Numerology Analysis</h3>
-                <p className="text-gray-500 dark:text-gray-400">Discover the hidden meanings in your life's numbers.</p>
+                <p className="text-yellow-500 dark:text-gray-400">Discover the hidden meanings in your life's numbers.</p>
               </div>
               <div className="flex flex-col items-center text-center">
                 <Sparkles className="h-12 w-12 mb-4 text-primary" />
                 <h3 className="text-xl font-bold mb-2">Personalized Reports</h3>
-                <p className="text-gray-500 dark:text-gray-400">Receive detailed reports tailored to your unique profile.</p>
+                <p className="text-yellow-500 dark:text-gray-400">Receive detailed reports tailored to your unique profile.</p>
               </div>
             </div>
           </div>
@@ -74,15 +75,15 @@ export default function LandingPage() {
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-center mb-8">What Our Clients Say</h2>
             <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
               <div className="flex flex-col items-center text-center">
-                <p className="mb-4 text-gray-500 dark:text-gray-400">"The insights I received were incredibly accurate and helpful!"</p>
+                <p className="mb-4 text-yellow-500 dark:text-gray-400">"The insights I received were incredibly accurate and helpful!"</p>
                 <p className="font-bold">- Sarah J.</p>
               </div>
               <div className="flex flex-col items-center text-center">
-                <p className="mb-4 text-gray-500 dark:text-gray-400">"I was skeptical at first, but my reading was spot on. Highly recommend!"</p>
+                <p className="mb-4 text-yellow-500 dark:text-gray-400">"I was skeptical at first, but my reading was spot on. Highly recommend!"</p>
                 <p className="font-bold">- Michael T.</p>
               </div>
               <div className="flex flex-col items-center text-center">
-                <p className="mb-4 text-gray-500 dark:text-gray-400">"The numerology analysis gave me a new perspective on my life path."</p>
+                <p className="mb-4 text-yellow-500 dark:text-gray-400">"The numerology analysis gave me a new perspective on my life path."</p>
                 <p className="font-bold">- Emma L.</p>
               </div>
             </div>
